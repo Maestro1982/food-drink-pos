@@ -1,8 +1,18 @@
 import React from 'react';
 import { Button, Card } from 'antd';
+import { useDispatch } from 'react-redux';
 
 const Product = ({ product }) => {
   const { Meta } = Card;
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: { ...product, quantity: 1 },
+    });
+  };
+
   return (
     <Card
       hoverable
@@ -16,7 +26,7 @@ const Product = ({ product }) => {
     >
       <Meta title={product.name} description={product.category} />
       <div className='product-btn'>
-        <Button>Add to Cart</Button>
+        <Button onClick={() => addToCartHandler()}>Add to Cart</Button>
       </div>
     </Card>
   );

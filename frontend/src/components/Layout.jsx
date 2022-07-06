@@ -11,14 +11,16 @@ import {
 import { Layout, Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './layout.css';
+import Spinner from './Spinner';
 
 const { Header, Sider, Content } = Layout;
 
 const LayoutApp = ({ children }) => {
-  const { cartItems } = useSelector((state) => state.rootReducer);
+  const { cartItems, loading } = useSelector((state) => state.rootReducer);
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   const toggle = () => {
     setCollapsed(!collapsed);
@@ -30,6 +32,7 @@ const LayoutApp = ({ children }) => {
 
   return (
     <Layout>
+      {loading && <Spinner />}
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className='logo'>
           <h2 className='logo-title'>KT POS</h2>
@@ -71,7 +74,7 @@ const LayoutApp = ({ children }) => {
             }
           )}
           <div className='cart-items'>
-            <ShoppingCartOutlined />
+            <ShoppingCartOutlined onClick={() => navigate('/cart')} />
             <span className='cart-badge'>{cartItems.length}</span>
           </div>
         </Header>

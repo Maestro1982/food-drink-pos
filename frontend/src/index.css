@@ -40,6 +40,7 @@ body {
   position: relative;
   margin-right: 25px;
   display: flex;
+  cursor: pointer;
 }
 
 .cart-badge {
@@ -54,4 +55,76 @@ body {
   width: 20px;
   height: 20px;
   border-radius: 50%;
+}
+
+.cart-plus {
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.cart-plus:hover {
+  filter: drop-shadow(0 0 2px #ff9505);
+  color: #ff9505;
+}
+
+.cart-minus {
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.cart-minus:hover {
+  filter: drop-shadow(0 0 2px #ff9505);
+  color: #ff9505;
+}
+
+.cart-quantity {
+  font-size: 20px;
+  vertical-align: bottom;
+}
+
+.cart-action {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.cart-action:hover {
+  filter: drop-shadow(0 0 2px #ff0000);
+  color: #ff0000;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  text-align: center;
+  color: #016fb9;
+  letter-spacing: 1.3px;
+}
+
+.cart-edit {
+  cursor: pointer;
+  transition: all 0.5s;
+  margin-left: 30px;
+}
+
+.cart-edit:hover {
+  filter: drop-shadow(0 0 2px #016fb9);
+  color: #016fb9;
+}
+
+.add-new {
+  display: block !important;
+  margin: 0 0 15px auto !important;
+  background-color: #353531 !important;
+  color: white !important;
+  box-shadow: 0 0 5px #353531 !important;
+  transition: all 0.5s;
+  border: none !important;
+}
+
+.add-new:hover {
+  background-color: #016fb9 !important;
+  color: white !important;
 }
