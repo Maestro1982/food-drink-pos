@@ -128,3 +128,22 @@ body {
   background-color: #016fb9 !important;
   color: white !important;
 }
+
+.category {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  padding: 5px;
+}
+
+.categoryFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 30px;
+  cursor: pointer;
+}
+
+.category-active {
+  box-shadow: 0 0 5px #016fb9;
+}

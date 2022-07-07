@@ -35,6 +35,29 @@ const Products = () => {
     getAllProducts();
   }, []);
 
+  const deleteHandler = async (record) => {
+    try {
+      dispatch({
+        type: 'SHOW_LOADING',
+      });
+      await axios.post('/api/products/deleteproducts', {
+        productId: record._id,
+      });
+      message.success('Product Deleted Successfully!');
+      getAllProducts();
+      setPopModal(false);
+      dispatch({
+        type: 'HIDE_LOADING',
+      });
+    } catch (error) {
+      dispatch({
+        type: 'HIDE_LOADING',
+      });
+      message.error('Error!');
+      console.log(error);
+    }
+  };
+
   const columns = [
     {
       title: 'Product Name',
@@ -60,7 +83,10 @@ const Products = () => {
       dataIndex: '_id',
       render: (id, record) => (
         <div>
-          <DeleteOutlined className='cart-action' />
+          <DeleteOutlined
+            className='cart-action'
+            onClick={() => deleteHandler(record)}
+          />
           <EditOutlined
             className='cart-edit'
             onClick={() => {
@@ -75,20 +101,47 @@ const Products = () => {
 
   const submitHandler = async (value) => {
     //console.log(value);
-    try {
-      dispatch({
-        type: 'SHOW_LOADING',
-      });
-      const res = await axios.post('/api/products/addproducts', value);
-      message.success('Product Added Successfully!');
-      getAllProducts();
-      setPopModal(false);
-      dispatch({
-        type: 'HIDE_LOADING',
-      });
-    } catch (error) {
-      message.error('Error!');
-      console.log(error);
+    if (editProduct === null) {
+      try {
+        dispatch({
+          type: 'SHOW_LOADING',
+        });
+        const res = await axios.post('/api/products/addproducts', value);
+        message.success('Product Added Successfully!');
+        getAllProducts();
+        setPopModal(false);
+        dispatch({
+          type: 'HIDE_LOADING',
+        });
+      } catch (error) {
+        dispatch({
+          type: 'HIDE_LOADING',
+        });
+        message.error('Error!');
+        console.log(error);
+      }
+    } else {
+      try {
+        dispatch({
+          type: 'SHOW_LOADING',
+        });
+        await axios.put('/api/products/updateproducts', {
+          ...value,
+          productId: editProduct._id,
+        });
+        message.success('Product Updated Successfully!');
+        getAllProducts();
+        setPopModal(false);
+        dispatch({
+          type: 'HIDE_LOADING',
+        });
+      } catch (error) {
+        dispatch({
+          type: 'HIDE_LOADING',
+        });
+        message.error('Error!');
+        console.log(error);
+      }
     }
   };
 
