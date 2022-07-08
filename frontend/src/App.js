@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import 'antd/dist/antd.min.css';
 import './App.css';
 import Home from './pages/home/Home';
@@ -12,9 +17,30 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/products' element={<Products />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route
+            path='/'
+            element={
+              <ProtectedRouter>
+                <Home />
+              </ProtectedRouter>
+            }
+          />
+          <Route
+            path='/products'
+            element={
+              <ProtectedRouter>
+                <Products />
+              </ProtectedRouter>
+            }
+          />
+          <Route
+            path='/cart'
+            element={
+              <ProtectedRouter>
+                <Cart />
+              </ProtectedRouter>
+            }
+          />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>
@@ -24,3 +50,11 @@ function App() {
 }
 
 export default App;
+
+export function ProtectedRouter({ children }) {
+  if (localStorage.getItem('auth')) {
+    return children;
+  } else {
+    return <Navigate to='/login' />;
+  }
+}

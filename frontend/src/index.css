@@ -202,3 +202,8 @@ body {
   color: #353531;
   text-decoration: underline;
 }
+
+.subtotal {
+  margin-right: 40px;
+  text-align: right;
+}

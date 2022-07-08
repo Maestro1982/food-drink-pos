@@ -1,12 +1,37 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
-  const submitHandler = (value) => {
-    console.log(value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const submitHandler = async (value) => {
+    try {
+      dispatch({
+        type: 'SHOW_LOADING',
+      });
+      await axios.post('/api/users/register', value);
+      message.success('User Register Successfully!');
+      navigate('/login');
+      dispatch({
+        type: 'HIDE_LOADING',
+      });
+    } catch (error) {
+      dispatch({
+        type: 'HIDE_LOADING',
+      });
+      message.error('Error Register Failed!');
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    localStorage.getItem('auth');
+    navigate('/');
+  }, [navigate]);
 
   return (
     <div className='form'>

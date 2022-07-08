@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import productRouter from './routes/productRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/products/', productRouter);
+app.use('/api/users/', userRouter);
 
 //Create Port
 const PORT = process.env.PORT || 5000;
