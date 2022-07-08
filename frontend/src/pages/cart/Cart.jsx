@@ -6,14 +6,16 @@ import {
   PlusCircleOutlined,
   MinusCircleOutlined,
 } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Select, Table } from 'antd';
-import FormItem from 'antd/lib/form/FormItem';
+import { Button, Form, message, Modal, Select, Table } from 'antd';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [subtotal, setSubtotal] = useState(0);
   const [billPopUp, setBillPopUp] = useState(false);
   const { cartItems } = useSelector((state) => state.rootReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const increaseHandler = (record) => {
     dispatch({
@@ -95,8 +97,27 @@ const Cart = () => {
     setSubtotal(temp);
   }, [cartItems]);
 
-  const submitHandler = (value) => {
-    console.log(value);
+  const submitHandler = async (value) => {
+    try {
+      const newObject = {
+        ...value,
+        cartItems,
+        subtotal: subtotal,
+        tax: Number(((subtotal / 100) * 6).toFixed(2)),
+        totalAmount: Number(
+          (
+            Number(subtotal) + Number(((subtotal / 100) * 6).toFixed(2))
+          ).toFixed(2)
+        ),
+        userId: JSON.parse(localStorage.getItem('auth'))._id,
+      };
+      await axios.post('/api/bills/addbills', newObject);
+      message.success('Bill Invoice Generated Successfully!');
+      navigate('/bills');
+    } catch (error) {
+      message.error('Generate Invoice Failed!');
+      console.log(error);
+    }
   };
 
   return (
@@ -118,12 +139,6 @@ const Cart = () => {
         footer={false}
       >
         <Form layout='vertical' onFinish={submitHandler}>
-          <FormItem name='customerName' label='Customer Name'>
-            <Input />
-          </FormItem>
-          <FormItem name='customerPhone' label='Customer Phone'>
-            <Input />
-          </FormItem>
           <Form.Item name='paymentMethod' label='Payment Method'>
             <Select>
               <Select.Option value='cash'>Cash</Select.Option>
@@ -131,6 +146,16 @@ const Cart = () => {
               <Select.Option value='card'>Card</Select.Option>
             </Select>
           </Form.Item>
+          <div className='total'>
+            <span>Subtotal: €{subtotal.toFixed(2)}</span>
+            <span>Tax: €{((subtotal / 100) * 6).toFixed(2)}</span>
+            <h3>
+              Total: €
+              {Number(
+                subtotal + Number(((subtotal / 100) * 6).toFixed(2))
+              ).toFixed(2)}
+            </h3>
+          </div>
           <div className='form-btn-add'>
             <Button htmlType='submit' className='add-new'>
               Generate Invoice

@@ -4,7 +4,7 @@ import User from '../models/userModel.js';
 export const loginController = async (req, res) => {
   try {
     const { userId, password } = req.body;
-    const user = await User.findOne({ userId, password, verified: true });
+    const user = await User.findOne({ userId, password });
     if (user) {
       res.status(200).send(user);
     } else {

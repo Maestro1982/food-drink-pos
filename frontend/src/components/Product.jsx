@@ -24,7 +24,7 @@ const Product = ({ product }) => {
         <img alt={product.name} src={product.image} style={{ height: 220 }} />
       }
     >
-      <Meta title={product.name} description={`€${product.price}`} />
+      <Meta title={product.name} description={`€${product.price} tax excl.`} />
       <div className='product-btn'>
         <Button onClick={() => addToCartHandler()}>Add to Cart</Button>
       </div>

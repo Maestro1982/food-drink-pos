@@ -16,7 +16,7 @@ const Login = () => {
       dispatch({
         type: 'SHOW_LOADING',
       });
-      const res = await axios.post('/api/users/login');
+      const res = await axios.post('/api/users/login', value);
       message.success('User Login Successfully!');
       localStorage.setItem('auth', JSON.stringify(res.data));
       navigate('/');
@@ -33,8 +33,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    localStorage.getItem('auth');
-    navigate('/');
+    if (localStorage.getItem('auth')) {
+      localStorage.getItem('auth');
+      navigate('/');
+    }
   }, [navigate]);
 
   return (
