@@ -3,11 +3,15 @@ import mongoose from 'mongoose';
 // Create table in db
 const billSchema = new mongoose.Schema(
   {
-    totalAmount: {
+    subtotal: {
       type: Number,
       required: true,
     },
     tax: {
+      type: Number,
+      required: true,
+    },
+    totalAmount: {
       type: Number,
       required: true,
     },

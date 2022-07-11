@@ -147,7 +147,7 @@ const Cart = () => {
             </Select>
           </Form.Item>
           <div className='total'>
-            <span>Subtotal: €{subtotal.toFixed(2)}</span>
+            <span>Subtotal: €{subtotal.toFixed(2)}</span> <br />
             <span>Tax: €{((subtotal / 100) * 6).toFixed(2)}</span>
             <h3>
               Total: €

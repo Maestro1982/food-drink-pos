@@ -114,6 +114,10 @@ body {
   color: #016fb9;
 }
 
+.cart-edit.eye {
+  margin-left: unset;
+}
+
 .add-new {
   display: block !important;
   margin: 0 0 15px auto !important;
@@ -206,4 +210,67 @@ body {
 .subtotal {
   margin-right: 40px;
   text-align: right;
+}
+
+.cardHeader h2 {
+  letter-spacing: 1.3px;
+  color: #353531;
+}
+
+.cardHeader span {
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1.3px;
+  color: #353531;
+}
+
+.cardBody {
+  margin-top: 30px;
+}
+
+.cardBody .group {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #353531;
+  padding-top: 10px;
+}
+
+.footerCard {
+  margin: 15px 0;
+  box-shadow: 0 0 15px #afafaf;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.cardFooter h4 {
+  margin-top: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+}
+
+.footerCard .group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerCardTotal {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: underline;
+}
+
+.footerThanks {
+  text-align: center;
+  margin-top: 10px;
+  color: #353531;
+}
+
+.bills-btn-add {
+  margin-top: 15px;
+}
+
+.bills-btn-add .add-new {
+  font-size: 12px !important;
+  padding: 5px !important;
 }

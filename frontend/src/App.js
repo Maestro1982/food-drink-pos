@@ -11,6 +11,7 @@ import Products from './pages/products/Products';
 import Cart from './pages/cart/Cart';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+import Bill from './pages/bill/Bill';
 
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
             element={
               <ProtectedRouter>
                 <Cart />
+              </ProtectedRouter>
+            }
+          />
+          <Route
+            path='/bills'
+            element={
+              <ProtectedRouter>
+                <Bill />
               </ProtectedRouter>
             }
           />

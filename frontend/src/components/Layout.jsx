@@ -2,7 +2,6 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   HomeOutlined,
-  UserSwitchOutlined,
   EuroOutlined,
   LogoutOutlined,
   ShopOutlined,
@@ -51,18 +50,15 @@ const LayoutApp = ({ children }) => {
           <Menu.Item key='/products' icon={<ShopOutlined />}>
             <Link to='/products'>Products</Link>
           </Menu.Item>
-          <Menu.Item key='/customers' icon={<UserSwitchOutlined />}>
-            <Link to='/customers'>Customers</Link>
-          </Menu.Item>
           <Menu.Item
-            key='/customers'
+            key='/logout'
             icon={<LogoutOutlined />}
             onClick={() => {
               localStorage.removeItem('auth');
               navigate('/login');
             }}
           >
-            <Link to='/customers'>LogOut</Link>
+            <Link to='/logout'>LogOut</Link>
           </Menu.Item>
         </Menu>
       </Sider>
